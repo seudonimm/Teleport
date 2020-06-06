@@ -20,11 +20,18 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody2D objToTeleport;
 
+
+
+
+
+
     Color colr;
 
     private static bool noTeleport;
 
     RaycastHit2D hit;
+
+    [SerializeField] Collider2D hitCollider;
 
     string sceneName;
 
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour
         TeleportObject();
         TeleportToTarget();
 
-
+        hitCollider = hit.collider;
 
     }
 
@@ -138,8 +145,19 @@ public class PlayerController : MonoBehaviour
     }
 
     void TeleportObject()
-    {
-        if (player1.GetButtonDown("other.Teleport") && objToTeleport == null)
+    {//yes1,no2,box3,enemy4
+        if (player1.GetButtonDown("other.Teleport") && hit.collider != null && objToTeleport != null)
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                target.GetComponent<SpriteRenderer>().color = Color.red;
+
+                TargetSwitchControl.targetColor = 2;
+
+                objToTeleport.transform.position = hit.point;
+            }
+        }
+        else if (player1.GetButtonDown("other.Teleport") && objToTeleport == null)
         {
             if (hit.collider.CompareTag("Object"))
             {
@@ -149,12 +167,13 @@ public class PlayerController : MonoBehaviour
                 objToTeleport.GetComponent<SpriteRenderer>().color = Color.cyan;
             }
         }
-        else if (player1.GetButtonDown("other.Teleport"))
+        else if (player1.GetButtonDown("other.Teleport") && hit.collider == null)
         {
             objToTeleport.transform.position = target.transform.position;
             objToTeleport.GetComponent<SpriteRenderer>().color = colr;
 
             objToTeleport = null;
+            Debug.Log("teleportobj");
         }
 
     }
@@ -182,12 +201,14 @@ public class PlayerController : MonoBehaviour
             if(hit.collider.CompareTag("Gap Wall"))
             {
                 target.GetComponent<SpriteRenderer>().color = Color.red;
+                TargetSwitchControl.targetColor = 2;
 
                 destination = transform.position;
             }
             else if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground"))
             {
                 target.GetComponent<SpriteRenderer>().color = Color.red;
+                TargetSwitchControl.targetColor = 2;
 
                 destination = hit.point;
                 Debug.Log(hit.transform.name);
@@ -200,6 +221,11 @@ public class PlayerController : MonoBehaviour
             else if (hit.collider.CompareTag("Object") || hit.collider.CompareTag("Enemy"))
             {
                 target.GetComponent<SpriteRenderer>().color = Color.magenta;
+
+                if (hit.collider.CompareTag("Object"))
+                    TargetSwitchControl.targetColor = 3;
+                if (hit.collider.CompareTag("Enemy"))
+                    TargetSwitchControl.targetColor = 4;
 
                 Debug.Log(hit.transform.name);
                 touchingObj = true;
@@ -215,6 +241,7 @@ public class PlayerController : MonoBehaviour
 
             destination = target.transform.position;
             Debug.Log("not hitting");
+            TargetSwitchControl.targetColor = 1;
 
             touchingObj = false;
 

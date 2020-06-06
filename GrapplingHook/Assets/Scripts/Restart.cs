@@ -18,5 +18,10 @@ public class Restart : MonoBehaviour
         {
             SceneManager.LoadScene("TestLevel1");
         }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit()
+                ;
+        }
     }
 }

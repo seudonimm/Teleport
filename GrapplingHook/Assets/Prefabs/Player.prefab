@@ -151,6 +151,10 @@ MonoBehaviour:
   touchingObj: 0
   destination: {x: 0, y: 0}
   objToTeleport: {fileID: 0}
+  noTele: {fileID: 21300000, guid: 7458b2b435eb283408a663f952d5c312, type: 3}
+  yesTele: {fileID: 21300000, guid: fc2eb80cc73a88d45a6d807d44a76794, type: 3}
+  boxTele: {fileID: 21300000, guid: 1c9435b99f80d8a43ac28b416589965b, type: 3}
+  enemyTele: {fileID: 21300000, guid: bbd2f10511ed78b428caf02b67bbe6a2, type: 3}
   anim: {fileID: 2044142360}
 --- !u!95 &2044142360
 Animator:

@@ -133,14 +133,19 @@
     <Compile Include="Assets\Scripts\NoTeleportZone.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />
+    <Compile Include="Assets\Scripts\TargetSwitchControl.cs" />
     <Compile Include="Assets\Scripts\TextReader.cs" />
     <Compile Include="Assets\Scripts\TitleScreen.cs" />
     <None Include="Assets\Scripts\this.txt" />
     <None Include="Assets\Rewired\Documentation\ReleaseNotes.txt" />
+    <None Include="Assets\Scripts\comic idea.txt" />
     <None Include="Assets\Rewired\Documentation\ReadMe.txt" />
     <None Include="Assets\Rewired\Documentation\licences.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
@@ -159,6 +164,15 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/Jawad Usman/Documents/GitHub/Teleport/GrapplingHook/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
