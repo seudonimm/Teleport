@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     Color colr;
 
-    private static bool noTeleport;
+    private static bool noTeleport; //stops from teleporting into gaps
 
     RaycastHit2D hit;
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
 
-
+    private StateMachine stateMachine = new StateMachine();
 
     // Start is called before the first frame update
     void Start()
@@ -54,20 +54,27 @@ public class PlayerController : MonoBehaviour
 
         sceneName = currentScene.name;
 
-        //this.GetComponent<PhysicsMaterial2D>().bounciness = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //this.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        //this.GetComponent<Rigidbody2D>().interpolation = RigidbodyInterpolation2D.Extrapolate;
-
         noTeleport = NoTeleportZone.dontTeleport;   //stops from teleporting into gaps
 
         hit = Physics2D.Linecast(transform.position, target.transform.position);
 
         GetInput();
+
+        LineOfSight();
+        TeleportObject();
+        TeleportToTarget();
+
+        hitCollider = hit.collider;
+
+    }
+
+    private void FixedUpdate()
+    {
         if (player1.GetButton("Move"))
         {
             ProcessInput();
@@ -79,12 +86,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("not moving");
 
         }
-
-        LineOfSight();
-        TeleportObject();
-        TeleportToTarget();
-
-        hitCollider = hit.collider;
 
     }
 
@@ -102,7 +103,6 @@ public class PlayerController : MonoBehaviour
         if (moveVector.x > 0)
         {
             rb.velocity = transform.right * moveSpeed * Time.deltaTime;
-            //transform.position += transform.right * moveSpeed * Time.deltaTime;
 
             anim.SetBool("isRunning", true);
             Debug.Log("right moving");
@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = -transform.right * moveSpeed * Time.deltaTime;
 
-            //transform.position += -transform.right * moveSpeed * Time.deltaTime;
             anim.SetBool("isRunning", true);
             Debug.Log("left moving");
 
@@ -122,18 +121,22 @@ public class PlayerController : MonoBehaviour
 
     void TeleportToTarget()
     {
-        if (player1.GetButtonDown("Teleport") && !touchingObj)
+        if (player1.GetButtonDown("Teleport") && !touchingObj) //teleport to cursor position if not touching anything
+
         {
+            //Teleport
             transform.position = destination;
             destination = target.transform.position;
         }
-        else if (player1.GetButtonDown("Teleport") && !touchingObj && hit.collider.CompareTag("NoTeleportZone"))
+        else if (player1.GetButtonDown("Teleport") && !touchingObj && hit.collider.CompareTag("NoTeleportZone")) //don't teleport if cursor is on designated "No Teleport Zone"
         {
+            //noTeleport
             transform.position = destination;
             destination = target.transform.position;
         }
-        else if (player1.GetButtonDown("Teleport") && touchingObj)
+        else if (player1.GetButtonDown("Teleport") && touchingObj) //if cursor is touching an object switch places with it
         {
+            //Teleport
             obj = hit.rigidbody;
             Vector2 temp = obj.transform.position;
             obj.transform.position = transform.position;
@@ -144,11 +147,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void TeleportObject()
+    void TeleportObject() //to teleport an object from one place to another
     {//yes1,no2,box3,enemy4
-        if (player1.GetButtonDown("other.Teleport") && hit.collider != null && objToTeleport != null)
+        if (player1.GetButtonDown("other.Teleport") && hit.collider != null && objToTeleport != null) //if an object has been selected to be teleported and something else is colliding with cursor linecast
         {
-            if (hit.collider.CompareTag("Wall"))
+            if (hit.collider.CompareTag("Wall")) //if linecast is hitting a wall teleport object to the point of collision
             {
                 target.GetComponent<SpriteRenderer>().color = Color.red;
 
@@ -157,9 +160,9 @@ public class PlayerController : MonoBehaviour
                 objToTeleport.transform.position = hit.point;
             }
         }
-        else if (player1.GetButtonDown("other.Teleport") && objToTeleport == null)
+        else if (player1.GetButtonDown("other.Teleport") && objToTeleport == null) // if nothing has been selected to be teleported
         {
-            if (hit.collider.CompareTag("Object"))
+            if (hit.collider.CompareTag("Object")) //if linecast is hitting an object, select as object to be teleported
             {
                 objToTeleport = hit.rigidbody;
                 colr = objToTeleport.GetComponent<SpriteRenderer>().color;
@@ -167,7 +170,7 @@ public class PlayerController : MonoBehaviour
                 objToTeleport.GetComponent<SpriteRenderer>().color = Color.cyan;
             }
         }
-        else if (player1.GetButtonDown("other.Teleport") && hit.collider == null)
+        else if (player1.GetButtonDown("other.Teleport") && hit.collider == null) //teleport the object to the cursor position
         {
             objToTeleport.transform.position = target.transform.position;
             objToTeleport.GetComponent<SpriteRenderer>().color = colr;
@@ -178,13 +181,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void LineOfSight()
+    void LineOfSight() // controls destination of teleport thorugh linecast collisions
     {
 
-        if (hit.collider != null)
+        if (hit.collider != null) //if linecast is hitting something
         {
             Debug.Log("hit");
-            if (noTeleport)
+            if (noTeleport) // destination is equal to the edge of gap
             {
 
                 //target.transform.position = target.transform.position;
@@ -193,19 +196,19 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(hit.transform.name);
             }
 
-            if (!noTeleport)
+            if (!noTeleport) // destination is equal to cursor position
             {
                 destination = target.transform.position;
             }
 
-            if(hit.collider.CompareTag("Gap Wall"))
+            if(hit.collider.CompareTag("Gap Wall")) // destination equal to edge of gap wall
             {
                 target.GetComponent<SpriteRenderer>().color = Color.red;
                 TargetSwitchControl.targetColor = 2;
 
                 destination = transform.position;
             }
-            else if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground"))
+            else if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground")) //destination equal to collision point of linecast and wall/ground
             {
                 target.GetComponent<SpriteRenderer>().color = Color.red;
                 TargetSwitchControl.targetColor = 2;
@@ -214,11 +217,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(hit.transform.name);
 
                 touchingObj = false;
-                //target.transform.position = hit.point;
 
             }
 
-            else if (hit.collider.CompareTag("Object") || hit.collider.CompareTag("Enemy"))
+            else if (hit.collider.CompareTag("Object") || hit.collider.CompareTag("Enemy")) //set "touchingObj" to true see "TeleportObject" method
             {
                 target.GetComponent<SpriteRenderer>().color = Color.magenta;
 
@@ -229,13 +231,12 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log(hit.transform.name);
                 touchingObj = true;
-                //target.transform.position = hit.point;
 
             }
 
 
         }
-        else
+        else //destination equal to cursor position & touchingObject = false
         {
             target.GetComponent<SpriteRenderer>().color = Color.green;
 
@@ -252,9 +253,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")) //reload scene on death
         {
             SceneManager.LoadScene(sceneName);
         }
     }
 }
+

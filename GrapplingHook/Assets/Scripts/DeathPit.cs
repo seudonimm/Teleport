@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class DeathPit : MonoBehaviour
 {
     [SerializeField] GameObject door;
-    string level;
+    private string level;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +24,11 @@ public class DeathPit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")) //reload scene on player death
         {
             SceneManager.LoadScene(level);
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy")) // open door on enemy death
         {
             door.GetComponent<Collider2D>().enabled = false;
             door.GetComponent<SpriteRenderer>().enabled = false;

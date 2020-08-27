@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5409725825312113749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.857, y: -0.653, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   yesTele: {fileID: 21300000, guid: fc2eb80cc73a88d45a6d807d44a76794, type: 3}
   boxTele: {fileID: 21300000, guid: 1c9435b99f80d8a43ac28b416589965b, type: 3}
   enemyTele: {fileID: 21300000, guid: bbd2f10511ed78b428caf02b67bbe6a2, type: 3}
+  player: {fileID: 0}
 --- !u!50 &973283329
 Rigidbody2D:
   serializedVersion: 4

@@ -14,18 +14,19 @@ public class GrapplingHook : MonoBehaviour
 
     [SerializeField] Sprite enemyTele;
 
+    [SerializeField] GameObject player;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {//yes1,no2,box3,enemy4
-        Vector3 worldMousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2f);
-        //direction = (Vector2)((worldMousePos - transform.position));
+        Vector3 worldMousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, player.transform.position.z);
         direction.Normalize();
 
 
@@ -33,6 +34,8 @@ public class GrapplingHook : MonoBehaviour
 
         transform.position = worldMousePos;
         Debug.Log(angle);
+
+        // controls look of cursor depending on state
         if (TargetSwitchControl.targetColor == 1)
         {
             this.GetComponent<SpriteRenderer>().sprite = yesTele;

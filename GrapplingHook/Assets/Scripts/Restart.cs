@@ -20,8 +20,8 @@ public class Restart : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit()
-                ;
+            Application.Quit();
+                
         }
     }
 }

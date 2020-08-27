@@ -128,12 +128,17 @@
     <Compile Include="Assets\Scripts\DoorControl.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GrapplingHook.cs" />
+    <Compile Include="Assets\Scripts\IState.cs" />
     <Compile Include="Assets\Scripts\Line.cs" />
     <Compile Include="Assets\Scripts\NextLevel.cs" />
+    <Compile Include="Assets\Scripts\NoTeleportState.cs" />
     <Compile Include="Assets\Scripts\NoTeleportZone.cs" />
+    <Compile Include="Assets\Scripts\ObjectTeleportState.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Restart.cs" />
+    <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\TargetSwitchControl.cs" />
+    <Compile Include="Assets\Scripts\TeleportState.cs" />
     <Compile Include="Assets\Scripts\TextReader.cs" />
     <Compile Include="Assets\Scripts\TitleScreen.cs" />
     <None Include="Assets\Scripts\this.txt" />

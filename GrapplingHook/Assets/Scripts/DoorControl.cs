@@ -22,7 +22,7 @@ public class DoorControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Object"))
+        if (collision.gameObject.CompareTag("Object")) //open door
         {
             door.GetComponent<Collider2D>().enabled = false;
             door.GetComponent<SpriteRenderer>().enabled = false;
@@ -34,7 +34,7 @@ public class DoorControl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Object"))
+        if (collision.gameObject.CompareTag("Object"))// close door
         {
             door.GetComponent<Collider2D>().enabled = true;
             door.GetComponent<SpriteRenderer>().enabled = true;
