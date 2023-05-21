@@ -144,7 +144,7 @@ TextureImporter:
       213: -2883883021378362179
     second: labTilesSmall_46
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -164,6 +164,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -173,8 +175,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -195,9 +197,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -213,6 +220,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1223,6 +1254,54 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      labTilesSmall_0: -7892779699793290421
+      labTilesSmall_1: -1155897667142726455
+      labTilesSmall_10: -7054620380688276110
+      labTilesSmall_11: 5400702777100596167
+      labTilesSmall_12: 3487886928563167505
+      labTilesSmall_13: -5833310909982431043
+      labTilesSmall_14: -6369691296118763832
+      labTilesSmall_15: -3621172202595695118
+      labTilesSmall_16: -7405482094730790236
+      labTilesSmall_17: 3952746680999849165
+      labTilesSmall_18: 4053877947808608405
+      labTilesSmall_19: -4639725108098084158
+      labTilesSmall_2: -437560279292983616
+      labTilesSmall_20: 8999188677513460376
+      labTilesSmall_21: -4639991286724393616
+      labTilesSmall_22: -1314483866941082687
+      labTilesSmall_23: 5239160481404867468
+      labTilesSmall_24: 1814877488733853868
+      labTilesSmall_25: -4221411421885897861
+      labTilesSmall_26: 4467715298751636488
+      labTilesSmall_27: 2159475246744312763
+      labTilesSmall_28: 1210041355226771523
+      labTilesSmall_29: 8409696212574729426
+      labTilesSmall_3: 4310265873567201195
+      labTilesSmall_30: -7345702403928002349
+      labTilesSmall_31: 5219141740080234797
+      labTilesSmall_32: -9117323728196240444
+      labTilesSmall_33: 5621863753410685110
+      labTilesSmall_34: 3599770656490655078
+      labTilesSmall_35: 1101909239368627052
+      labTilesSmall_36: 3128042013916528562
+      labTilesSmall_37: 7095921049498727812
+      labTilesSmall_38: -4602436601916711218
+      labTilesSmall_39: -2976259010474336116
+      labTilesSmall_4: 5134712882963709006
+      labTilesSmall_40: 1586686513696898702
+      labTilesSmall_41: -1990495652485739959
+      labTilesSmall_42: 1683310708866669590
+      labTilesSmall_43: 6553966184391827691
+      labTilesSmall_44: 7909616720042639869
+      labTilesSmall_45: -7819593293283106982
+      labTilesSmall_46: -2883883021378362179
+      labTilesSmall_5: 6631379366102295297
+      labTilesSmall_6: -3105579536413031515
+      labTilesSmall_7: 2645311335774777993
+      labTilesSmall_8: -2080102968337134132
+      labTilesSmall_9: 3561485109654715347
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Rigidbody2D objToTeleport;
 
+    [SerializeField] SpriteRenderer playerSpr;
 
+    [SerializeField] SpriteRenderer targetSpr;
 
 
 
@@ -39,8 +41,6 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
 
-    private StateMachine stateMachine = new StateMachine();
-
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
         player1 = ReInput.players.GetPlayer(0);
 
         RaycastHit2D hit = Physics2D.Linecast(transform.position, target.transform.position);
+
+        targetSpr = target.GetComponent<SpriteRenderer>();
+        playerSpr = GetComponent<SpriteRenderer>();
 
         Scene currentScene = SceneManager.GetActiveScene();
 
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetBool("isRunning", false);
-            Debug.Log("not moving");
+            //Debug.Log("not moving");
 
         }
 
@@ -98,24 +101,28 @@ public class PlayerController : MonoBehaviour
 
     void ProcessInput()
     {
-        transform.position += transform.right * moveSpeed * Time.deltaTime * 0;
-
+        var vel = rb.velocity;
         if (moveVector.x > 0)
         {
-            rb.velocity = transform.right * moveSpeed * Time.deltaTime;
+            vel.x = 1 * moveSpeed * Time.fixedDeltaTime;
 
+            playerSpr.flipX = false;
             anim.SetBool("isRunning", true);
-            Debug.Log("right moving");
+
+            //Debug.Log("right moving");
 
         }
         if (moveVector.x < 0)
         {
-            rb.velocity = -transform.right * moveSpeed * Time.deltaTime;
+            vel.x = -1 * moveSpeed * Time.fixedDeltaTime;
 
+            playerSpr.flipX = true;
             anim.SetBool("isRunning", true);
-            Debug.Log("left moving");
+            
+            //Debug.Log("left moving");
 
         }
+        rb.velocity = vel;
 
     }
 
@@ -153,7 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Wall")) //if linecast is hitting a wall teleport object to the point of collision
             {
-                target.GetComponent<SpriteRenderer>().color = Color.red;
+                targetSpr.color = Color.red;
 
                 TargetSwitchControl.targetColor = 2;
 
@@ -176,7 +183,7 @@ public class PlayerController : MonoBehaviour
             objToTeleport.GetComponent<SpriteRenderer>().color = colr;
 
             objToTeleport = null;
-            Debug.Log("teleportobj");
+            //Debug.Log("teleportobj");
         }
 
     }
@@ -186,14 +193,14 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider != null) //if linecast is hitting something
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             if (noTeleport) // destination is equal to the edge of gap
             {
 
                 //target.transform.position = target.transform.position;
                 destination = hit.point;
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
             }
 
             if (!noTeleport) // destination is equal to cursor position
@@ -203,18 +210,18 @@ public class PlayerController : MonoBehaviour
 
             if(hit.collider.CompareTag("Gap Wall")) // destination equal to edge of gap wall
             {
-                target.GetComponent<SpriteRenderer>().color = Color.red;
+                targetSpr.color = Color.red;
                 TargetSwitchControl.targetColor = 2;
 
                 destination = transform.position;
             }
             else if (hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground")) //destination equal to collision point of linecast and wall/ground
             {
-                target.GetComponent<SpriteRenderer>().color = Color.red;
+                targetSpr.color = Color.red;
                 TargetSwitchControl.targetColor = 2;
 
                 destination = hit.point;
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
 
                 touchingObj = false;
 
@@ -222,14 +229,14 @@ public class PlayerController : MonoBehaviour
 
             else if (hit.collider.CompareTag("Object") || hit.collider.CompareTag("Enemy")) //set "touchingObj" to true see "TeleportObject" method
             {
-                target.GetComponent<SpriteRenderer>().color = Color.magenta;
+                targetSpr.color = Color.magenta;
 
                 if (hit.collider.CompareTag("Object"))
                     TargetSwitchControl.targetColor = 3;
                 if (hit.collider.CompareTag("Enemy"))
                     TargetSwitchControl.targetColor = 4;
 
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 touchingObj = true;
 
             }
@@ -238,16 +245,16 @@ public class PlayerController : MonoBehaviour
         }
         else //destination equal to cursor position & touchingObject = false
         {
-            target.GetComponent<SpriteRenderer>().color = Color.green;
+            targetSpr.color = Color.green;
 
             destination = target.transform.position;
-            Debug.Log("not hitting");
+            //Debug.Log("not hitting");
             TargetSwitchControl.targetColor = 1;
 
             touchingObj = false;
 
         }
-        Debug.DrawLine(transform.position, target.transform.position, Color.red);
+        //Debug.DrawLine(transform.position, target.transform.position, Color.red);
 
     } 
 

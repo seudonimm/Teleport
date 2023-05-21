@@ -160,6 +160,13 @@ void Update() {
     <p>This way, you don't have to worry about what type or how many controllers the player is using -- you simply get your input based on the Action.</p>
     <p>You can also get input based on the Action id instead. The Action id is displayed in the <a href="RewiredEditor.html#Actions">Rewired Editor under Actions</a>. You can <a href="HowTos.html#exporting-constants">export a list of Action Id constants</a> which adds the convenience of letting you use your IDE's auto-complete  to find Actions when coding. Looking up Actions by id is significantly faster than by name and is  the recommended method.</p>
     <p>Additionally, you have the option of using input events instead of polling for input as shown in the above example. See <a href="HowTos.html#get-input">How To's - Getting Input</a> for more information.</p>
+    <p><strong>Buttons and Axes</strong></p>
+    <p>An Action is neither a button nor an axis. An Action is a virtual element 
+      that can be queried as both a button (boolean value) and an axis (floating 
+      point value). All <a href="https://guavaman.com/projects/rewired/docs/api-reference/html/T_Rewired_Player.htm">Player Button and Axis methods</a> work regardless of what type or how many 
+      underlying elements make up the value of the Action.</p>
+    <p>When querying an Action's Button value, if the underlying element bound to the Action is a physical or virtual axis, the Action's <a href="InputBehaviors.html#button-dead-zone">Input Behavior Button Dead Zone</a> is used to determine at what axis value the Button state change occurs. In addition, an underlying axis will only trigger a Button state change based on a positive axis value. If the axis has a negative value, this value is ignored for the purposes of the Button state, but instead contributes to a Negative Button state. <a href="HowTos.html#button-press-types-negative-buttons">See this form more information</a>.</p>
+    <p>When querying an Action's Axis value, if the underlying element bound to the Action is a physical or virtual button, the Action's <a href="InputBehaviors.html#digital-axis-settings">Input Behavior Digital Axis Settings</a> are used to determine how the axis value is calculated.    </p>
     <p><strong>Creating/Editing Actions</strong></p>
     <p>You must create and edit Actions in the <a href="RewiredEditor.html">Rewired Editor</a>. See <a href="RewiredEditor.html#Actions">Rewired Editor - Actions</a> for more information.</p>
     <p><strong>Action Categories</strong></p>
@@ -186,7 +193,7 @@ void Update() {
         
     </div>
   <div class="footer clearfix">
-   	<p class="left">Copyright &copy;2014-2019 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
+   	<p class="left">Copyright &copy;2014-2021 <a href="http://guavaman.com" title="Guavaman Enterprises">Guavaman Enterprises</a>. All rights reserved. No materials may be reproduced without permission.</p>
   	<p class="right"><a href="http://guavaman.com/projects/rewired" title="Return to Rewired Website">Return to Rewired Website</a></p>
   </div>
   <!-- end .content --></div>
